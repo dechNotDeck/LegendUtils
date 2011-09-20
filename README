@@ -1,0 +1,17 @@
+You will need 3 external jars for this to compile: Bukkit, Craftbukkit and Permissions
+
+Latest recommended Bukkit: http://ci.bukkit.org/job/dev-Bukkit/promotion/latest/Recommended/
+Latest recommended Craftbukkit: http://ci.bukkit.org/job/dev-CraftBukkit/promotion/latest/Recommended/
+****** FOR THE TIME BEING USE THIS LINK INSTEAD (update as necessary): http://ci.bukkit.org/job/dev-CraftBukkit/1152/artifact/target/craftbukkit-0.0.1-SNAPSHOT.jar
+Permissions: http://dev.bukkit.org/media/files/538/90/PermissionsEx-1.13-package.zip
+****** All you need is Permissions.jar
+
+Config is written to plugins/LegendUtils/config.yml
+
+Use LegendUtils.config.write to write your own config strings, read them with readString, readBoolean, readDouble, etc.
+
+Take a look in bitlegend.legendutils.Commands.XpCleanup for Permissions example.
+
+If you add new commands, make sure to include them in plugin.yml or they wont work. Also, use spaces instead of tabs. Tabs break yaml.
+
+****** PLEASE DON'T COMMIT/PUSH UNLESS YOU HAVE TESTED YOUR CHANGES AND THEY WORK
