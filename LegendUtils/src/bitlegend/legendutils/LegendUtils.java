@@ -64,7 +64,7 @@ public class LegendUtils extends JavaPlugin {
 		
 		//
 		getCommand("ti").setExecutor(new ToggleInventory(this));
-		/
+		//
 
 		getCommand("xpcleanup").setExecutor(new XpCleanup(this));
 		setupPermissions();
