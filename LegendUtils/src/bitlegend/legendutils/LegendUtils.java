@@ -6,7 +6,7 @@ import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.PluginManager;
 
-import bitlegend.legendutils.Listeners.LUPlayerListener;
+import bitlegend.legendutils.Listeners.*;
 import bitlegend.legendutils.Commands.*;
 
 import com.nijiko.permissions.PermissionHandler;
@@ -23,6 +23,7 @@ public class LegendUtils extends JavaPlugin {
 	public Config config = new Config(this);
 	
 	private final LUPlayerListener playerListener = new LUPlayerListener(this);
+	private final LUEntityListener entityListener = new LUEntityListener(this);
 
 	@Override
 	public void onDisable() {
@@ -38,6 +39,8 @@ public class LegendUtils extends JavaPlugin {
 		pm.registerEvent(Event.Type.PLAYER_LOGIN, playerListener, Event.Priority.Normal, this);
 		// Same thing, except when they login/quit the server.
 		pm.registerEvent(Event.Type.PLAYER_QUIT, playerListener, Event.Priority.Normal, this);
+		// Create a listener for entity damage
+		pm.registerEvent(Event.Type.ENTITY_DAMAGE, entityListener, Event.Priority.Normal, this);
 
 		// Alter Enderman pickup list - Cirn9, credit for method to nisovin's
 		// EnderNerf 9/19/2011
