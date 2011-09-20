@@ -74,6 +74,7 @@ public class Config {
 		write("DB_User", "root");
 		write("DB_Name", "minecraft");
 		write("DB_Pass", "password");
+		write("DB_Host", "localhost");
 		write("Enderman_Blocks", "103");
 		loadKeys();
 	}

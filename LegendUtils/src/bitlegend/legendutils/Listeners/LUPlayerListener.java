@@ -21,12 +21,14 @@ public class LUPlayerListener extends PlayerListener {
 	private String database = "";
 	private String dbuser = "";
 	private String dbpass = "";
+	private String dbhost = "";
 
 	public LUPlayerListener(LegendUtils instance) {
 		plugin = instance;
 		database = plugin.config.readString("DB_Name");
 		dbuser = plugin.config.readString("DB_User");
 		dbpass = plugin.config.readString("DB_Pass");
+		dbhost = plugin.config.readString("DB_Host");
 	}
 
 	public void onPlayerLogin(PlayerLoginEvent event) {
@@ -35,7 +37,7 @@ public class LUPlayerListener extends PlayerListener {
 		if (!checkForPlayer(player)) {
 			try {
 				Class.forName("com.mysql.jdbc.Driver").newInstance();
-				connect = DriverManager.getConnection("jdbc:mysql://bitlegend.com/" + database, dbuser, dbpass);
+				connect = DriverManager.getConnection("jdbc:mysql://" + dbhost + "/" + database, dbuser, dbpass);
 				statement = connect.createStatement();
 				int result = statement.executeUpdate("INSERT INTO Players (username) values('" + player.getDisplayName() + "');");
 			} catch (Exception e) {
@@ -60,7 +62,7 @@ public class LUPlayerListener extends PlayerListener {
 		if (checkForPlayer(player)) {
 			try {
 				Class.forName("com.mysql.jdbc.Driver").newInstance();
-				connect = DriverManager.getConnection("jdbc:mysql://bitlegend.com/" + database, dbuser, dbpass);
+				connect = DriverManager.getConnection("jdbc:mysql://" + dbhost + "/" + database, dbuser, dbpass);
 				statement = connect.createStatement();
 				int playerId = player.getEntityId();
 				String name = "";
@@ -91,7 +93,7 @@ public class LUPlayerListener extends PlayerListener {
 	private boolean checkForPlayer(Player player) {
 		try {
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
-			connect = DriverManager.getConnection("jdbc:mysql://bitlegend.com/" + database, dbuser, dbpass);
+			connect = DriverManager.getConnection("jdbc:mysql://" + dbhost + "/" + database, dbuser, dbpass);
 			statement = connect.createStatement();
 			ResultSet rs = statement.executeQuery("SELECT username FROM Players WHERE username='" + player.getDisplayName() + "';");
 			int count = 0;
@@ -110,7 +112,7 @@ public class LUPlayerListener extends PlayerListener {
 	public int clearPlayerList() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
-			connect = DriverManager.getConnection("jdbc:mysql://bitlegend.com/" + database, dbuser, dbpass);
+			connect = DriverManager.getConnection("jdbc:mysql://" + dbhost + "/" + database, dbuser, dbpass);
 			statement = connect.createStatement();
 			int result = statement.executeUpdate("DELETE FROM Players WHERE username='*';");
 			return result;
