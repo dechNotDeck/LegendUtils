@@ -1,0 +1,7 @@
+name: DechUtils
+version: 0.0.3
+main: dechiridas.dechutils.DechUtils
+commands:
+    xpcleanup:
+        description: Removes XP from the ground
+        usage: /xpcleanup
