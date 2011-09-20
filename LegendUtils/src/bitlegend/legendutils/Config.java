@@ -75,7 +75,7 @@ public class Config {
 		write("DB_Name", "minecraft");
 		write("DB_Pass", "password");
 		write("DB_Host", "localhost");
-		write("Enderman_Blocks", "103");
+		write("Enderman_Blocks", "103"); //Separate IDs by commas, no spaces. eg: 1,2,103,5,20
 		loadKeys();
 	}
 

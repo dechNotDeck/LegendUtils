@@ -48,7 +48,11 @@ public class LegendUtils extends JavaPlugin {
 			for (int i = 0; i < a.length; i++) {
 				a[i] = false; // can't pick item id i up
 			}
-			a[103] = true; // can pick up watermelon
+			String rawList = config.readString("Enderman_Blocks");
+			String[] parsedList = rawList.split(",");
+			for (int i = 0; i < parsedList.length; i++) {
+				a[Integer.parseInt(parsedList[i])] = true; //Can pickup item id put in here
+			}
 			f.set(null, a);
 			System.out.println(pdfFile.getName() + ": Enderman nerfing enabled.");
 		} catch (Exception e) {
