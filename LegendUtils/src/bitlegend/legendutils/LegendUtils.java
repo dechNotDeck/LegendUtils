@@ -26,6 +26,7 @@ public class LegendUtils extends JavaPlugin {
 
 	@Override
 	public void onDisable() {
+		playerListener.clearPlayerList();
 		System.out.println("DechUtils has been disabled.");
 	}
 
