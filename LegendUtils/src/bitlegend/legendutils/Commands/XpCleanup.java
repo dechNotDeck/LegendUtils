@@ -24,7 +24,7 @@ public class XpCleanup implements CommandExecutor {
 		}
 		if (plugin.getServer().getPluginManager().isPluginEnabled("Permissions")) {
 			Player player = (Player) sender;
-			if (plugin.permissionHandler.has(player, "dechutils.xpcleanup")) {
+			if (hasPermission(player)) {
 				System.out.println("Cleaning XP Orbs from worlds...");
 				double count = 0;
 				for (World w : plugin.getServer().getWorlds()) {
@@ -39,6 +39,15 @@ public class XpCleanup implements CommandExecutor {
 				player.sendMessage("Removed " + (int)count + " XP Orbs");
 				return true;
 			}
+		}
+		return false;
+	}
+	
+	private boolean hasPermission(Player player) {
+		if (plugin.permissionHandler.has(player, "legendutils.commands.xpcleanup") || 
+				plugin.permissionHandler.has(player, "legendutils.commands.*") || 
+				plugin.permissionHandler.has(player, "legendutils.*")) {
+			return true;
 		}
 		return false;
 	}
