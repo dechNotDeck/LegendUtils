@@ -5,3 +5,6 @@ commands:
     xpcleanup:
         description: Removes XP from the ground
         usage: /xpcleanup
+    ti:
+	   description: Allows a moderator to toggle between his player inventory and his moderator inventory
+        usage: /ti

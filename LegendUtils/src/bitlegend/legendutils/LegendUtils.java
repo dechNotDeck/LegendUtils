@@ -61,6 +61,10 @@ public class LegendUtils extends JavaPlugin {
 		} catch (Exception e) {
 			System.out.println(pdfFile.getName() + ": Could not get enderman declared field!");
 		}
+		
+		//
+		getCommand("ti").setExecutor(new ToggleInventory(this));
+		/
 
 		getCommand("xpcleanup").setExecutor(new XpCleanup(this));
 		setupPermissions();
