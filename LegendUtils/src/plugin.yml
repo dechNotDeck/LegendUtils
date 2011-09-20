@@ -1,6 +1,6 @@
-name: DechUtils
+name: LegendUtils
 version: 0.0.3
-main: dechiridas.dechutils.DechUtils
+main: bitlegend.legendutils.LegendUtils
 commands:
     xpcleanup:
         description: Removes XP from the ground
