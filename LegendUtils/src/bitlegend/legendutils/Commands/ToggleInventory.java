@@ -6,12 +6,9 @@
  */
 package bitlegend.legendutils.Commands;
 
-import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.ExperienceOrb;
 import org.bukkit.entity.Player;
 
 import bitlegend.legendutils.LegendUtils;
@@ -40,6 +37,7 @@ public class ToggleInventory implements CommandExecutor {
 				// /minv/username.pla - contains moderator inventory information
 				
 				//Get the current player's name
+				@SuppressWarnings("unused")
 				String pn = p.getName();
 				
 				

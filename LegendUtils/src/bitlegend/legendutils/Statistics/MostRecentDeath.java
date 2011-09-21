@@ -47,6 +47,7 @@ public class MostRecentDeath {
 		return theweapon.getType().name();
 	}
 	
+	@SuppressWarnings("unused")
 	public void outputToDatabase() {
 		String dbname = plugin.config.readString("DB_Name");
 		String dbhost = plugin.config.readString("DB_Host");

@@ -5,6 +5,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerListener;
 import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.player.PlayerRespawnEvent;
 
 import bitlegend.legendutils.LegendUtils;
 
@@ -30,8 +31,14 @@ public class LUPlayerListener extends PlayerListener {
 		dbpass = plugin.config.readString("DB_Pass");
 		dbhost = plugin.config.readString("DB_Host");
 	}
+	
+	public void onPlayerRespawn(PlayerRespawnEvent event) {
+		
+	}
 
 	public void onPlayerLogin(PlayerLoginEvent event) {
+		if (plugin.config.readBoolean("Debug_Mode") == false) // Remove me
+			return;
 		Player player = event.getPlayer();
 		
 		if (!checkForPlayer(player)) {
@@ -39,6 +46,7 @@ public class LUPlayerListener extends PlayerListener {
 				Class.forName("com.mysql.jdbc.Driver").newInstance();
 				connect = DriverManager.getConnection("jdbc:mysql://" + dbhost + "/" + database, dbuser, dbpass);
 				statement = connect.createStatement();
+				@SuppressWarnings("unused")
 				int result = statement.executeUpdate("INSERT INTO Players (username) values('" + player.getDisplayName() + "');");
 			} catch (Exception e) {
 				System.out.println(e);
@@ -58,6 +66,8 @@ public class LUPlayerListener extends PlayerListener {
 	}
 
 	public void onPlayerQuit(PlayerQuitEvent event) {
+		if (plugin.config.readBoolean("Debug_Mode") == false) // Remove me
+			return;
 		Player player = event.getPlayer();
 		if (checkForPlayer(player)) {
 			try {
@@ -72,6 +82,7 @@ public class LUPlayerListener extends PlayerListener {
 					//color codes.
 					if (p.getEntityId() == playerId) name = p.getName();
 				}
+				@SuppressWarnings("unused")
 				int result = statement.executeUpdate("DELETE FROM Players WHERE username = '" + name + "';");
 			} catch (Exception e) {
 				System.out.println(e);
@@ -91,6 +102,8 @@ public class LUPlayerListener extends PlayerListener {
 	}
 	
 	private boolean checkForPlayer(Player player) {
+		if (plugin.config.readBoolean("Debug_Mode") == false) // Remove me
+			return false;
 		try {
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
 			connect = DriverManager.getConnection("jdbc:mysql://" + dbhost + "/" + database, dbuser, dbpass);
@@ -110,6 +123,8 @@ public class LUPlayerListener extends PlayerListener {
 	}
 	
 	public int clearPlayerList() {
+		if (plugin.config.readBoolean("Debug_Mode") == false) // Remove me
+			return 0;
 		try {
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
 			connect = DriverManager.getConnection("jdbc:mysql://" + dbhost + "/" + database, dbuser, dbpass);
