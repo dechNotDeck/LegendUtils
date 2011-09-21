@@ -53,6 +53,6 @@ public class MostRecentDeath {
 		String dbuser = plugin.config.readString("DB_User");
 		String dbpass = plugin.config.readString("DB_Pass");
 		
-		
+		//System.out.println(thekiller.getDisplayName() + " killed " + deadplayer.getDisplayName() + " with " + theweapon.getType().name());
 	}
 }

@@ -18,12 +18,14 @@ public class LUEntityListener extends EntityListener {
 	public void onEntityDamage(EntityDamageEvent event) {
 		if (event instanceof EntityDamageByEntityEvent) {
 			EntityDamageByEntityEvent e = (EntityDamageByEntityEvent)event;
-			Player killed = (Player)event.getEntity();
-			Player killer = (Player)e.getDamager();
-			
-			if ((killed.getHealth() - e.getDamage()) <= 0) {
-				MostRecentDeath mrd = new MostRecentDeath(plugin, killed, killer);
-				mrd.outputToDatabase();
+			if (e.getEntity() instanceof Player && e.getDamager() instanceof Player) {
+				Player killed = (Player)e.getEntity();
+				Player killer = (Player)e.getDamager();
+				
+				if ((killed.getHealth() - e.getDamage()) <= 0) {
+					MostRecentDeath mrd = new MostRecentDeath(plugin, killed, killer);
+					mrd.outputToDatabase();
+				}
 			}
 		}
 	}

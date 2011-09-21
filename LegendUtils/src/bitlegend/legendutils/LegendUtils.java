@@ -8,6 +8,7 @@ import org.bukkit.plugin.PluginManager;
 
 import bitlegend.legendutils.Listeners.*;
 import bitlegend.legendutils.Commands.*;
+import bitlegend.legendutils.Threads.*;
 
 import com.nijiko.permissions.PermissionHandler;
 import com.nijikokun.bukkit.Permissions.Permissions;
@@ -28,11 +29,15 @@ public class LegendUtils extends JavaPlugin {
 	@Override
 	public void onDisable() {
 		playerListener.clearPlayerList();
-		System.out.println("DechUtils has been disabled.");
+		PluginDescriptionFile pdfFile = this.getDescription();
+		
+		System.out.println(pdfFile.getName() + " has been disabled.");
 	}
 
 	@Override
 	public void onEnable() {
+		playerListener.clearPlayerList();
+		
 		PluginDescriptionFile pdfFile = this.getDescription();
 		PluginManager pm = getServer().getPluginManager();
 		// Creates an event which is triggered each time a player logs in
@@ -69,6 +74,10 @@ public class LegendUtils extends JavaPlugin {
 		getCommand("xpcleanup").setExecutor(new XpCleanup(this));
 		setupPermissions();
 		config.configCheck();
+		
+		OnlineUsers ou = new OnlineUsers(this);
+		Thread checkUsers = ou.getThread();
+		checkUsers.start();
 
 		System.out.println(pdfFile.getName() + " " + pdfFile.getVersion()
 				+ " started!");
