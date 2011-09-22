@@ -75,7 +75,7 @@ public class Config {
 		write("DB_Name", "minecraft");
 		write("DB_Pass", "password");
 		write("DB_Host", "localhost");
-		write("Enderman_Blocks", "103"); //Separate IDs by commas, no spaces. eg: 1,2,103,5,20
+		write("Enderman_Blocks", "0,103"); //Separate IDs by commas, no spaces. eg: 1,2,103,5,20
 		write("XP_Modifier", 1.0);
 		write("Debug_Mode", false); //Set this to false or even completely remove this line
 		loadKeys();

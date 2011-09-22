@@ -37,7 +37,7 @@ public class LUPlayerListener extends PlayerListener {
 	}
 
 	public void onPlayerLogin(PlayerLoginEvent event) {
-		if (plugin.config.readBoolean("Debug_Mode") == false) // Remove me
+		if (plugin.config.readBoolean("Debug_Mode") == true) // Remove me
 			return;
 		Player player = event.getPlayer();
 		
@@ -66,7 +66,7 @@ public class LUPlayerListener extends PlayerListener {
 	}
 
 	public void onPlayerQuit(PlayerQuitEvent event) {
-		if (plugin.config.readBoolean("Debug_Mode") == false) // Remove me
+		if (plugin.config.readBoolean("Debug_Mode") == true) // Remove me
 			return;
 		Player player = event.getPlayer();
 		if (checkForPlayer(player)) {
@@ -102,24 +102,26 @@ public class LUPlayerListener extends PlayerListener {
 	}
 	
 	private boolean checkForPlayer(Player player) {
-		if (plugin.config.readBoolean("Debug_Mode") == false) // Remove me
+		if (plugin.config.readBoolean("Debug_Mode") == true) // Remove me
 			return false;
-		try {
-			Class.forName("com.mysql.jdbc.Driver").newInstance();
-			connect = DriverManager.getConnection("jdbc:mysql://" + dbhost + "/" + database, dbuser, dbpass);
-			statement = connect.createStatement();
-			ResultSet rs = statement.executeQuery("SELECT username FROM Players WHERE username='" + player.getDisplayName() + "';");
-			int count = 0;
-			while (rs.next())
-				count++;
-			if (count > 0)
-				return true;
-			else
-				return false;
-		} catch (Exception e) {
-			System.out.println("Unable to connect to database.");
+		else {
+			try {
+				Class.forName("com.mysql.jdbc.Driver").newInstance();
+				connect = DriverManager.getConnection("jdbc:mysql://" + dbhost + "/" + database, dbuser, dbpass);
+				statement = connect.createStatement();
+				ResultSet rs = statement.executeQuery("SELECT username FROM Players WHERE username='" + player.getDisplayName() + "';");
+				int count = 0;
+				while (rs.next())
+					count++;
+				if (count > 0)
+					return true;
+				else
+					return false;
+			} catch (Exception e) {
+				System.out.println("Unable to connect to database.");
+			}
+			return false;
 		}
-		return false;
 	}
 	
 	public int clearPlayerList() {
