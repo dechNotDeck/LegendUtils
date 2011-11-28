@@ -1,8 +1,15 @@
 package bitlegend.legendutils.Listeners;
 
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.Monster;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Snowball;
+import org.bukkit.entity.Snowman;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityListener;
+import org.bukkit.event.entity.ProjectileHitEvent;
 
 import bitlegend.legendutils.LegendUtils;
 
@@ -28,6 +35,22 @@ public class LUEntityListener extends EntityListener {
 			event.setDroppedExp((int)(xp * modifier));
 		} catch (Exception e) {
 			//
+		}
+	}
+	
+	@Override
+	public void onEntityDamage(EntityDamageEvent event){
+		try {
+			if(event instanceof EntityDamageByEntityEvent){
+				Entity damagesource = ((EntityDamageByEntityEvent)event).getDamager();
+				Entity damagetarget = ((EntityDamageByEntityEvent)event).getEntity();
+				if(damagesource instanceof Snowball && damagetarget instanceof Monster && ((Snowball)damagesource).getShooter() instanceof Snowman){
+					event.setDamage(1);
+				}
+			}
+			
+		} catch (Exception e) {
+			System.out.println("OnProjectileHit error! : " + e.getMessage());
 		}
 	}
 }
