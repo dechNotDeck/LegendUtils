@@ -9,7 +9,6 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityListener;
-import org.bukkit.event.entity.ProjectileHitEvent;
 
 import bitlegend.legendutils.LegendUtils;
 
@@ -50,7 +49,7 @@ public class LUEntityListener extends EntityListener {
 			}
 			
 		} catch (Exception e) {
-			System.out.println("OnProjectileHit error! : " + e.getMessage());
+			System.out.println("OnEntityDamage error! : " + e.getMessage());
 		}
 	}
 }
