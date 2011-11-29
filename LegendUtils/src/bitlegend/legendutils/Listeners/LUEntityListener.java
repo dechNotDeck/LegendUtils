@@ -43,8 +43,8 @@ public class LUEntityListener extends EntityListener {
 			if(event instanceof EntityDamageByEntityEvent){
 				Entity damagesource = ((EntityDamageByEntityEvent)event).getDamager();
 				Entity damagetarget = ((EntityDamageByEntityEvent)event).getEntity();
-				if(damagesource instanceof Snowball && damagetarget instanceof Monster && ((Snowball)damagesource).getShooter() instanceof Snowman){
-					event.setDamage(1);
+				if(damagesource instanceof Snowball && damagetarget instanceof Monster && !(damagetarget instanceof Snowman) && ((Snowball)damagesource).getShooter() instanceof Snowman){
+					event.setDamage(2);
 				}
 			}
 			
