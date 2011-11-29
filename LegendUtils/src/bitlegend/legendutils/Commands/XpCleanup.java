@@ -12,6 +12,11 @@ import bitlegend.legendutils.LegendUtils;
 
 public class XpCleanup implements CommandExecutor {
 	private final LegendUtils plugin;
+	private final String[] permissions = {
+				"legendutils.commands.xpcleanup", 
+				"legendutils.commands.*",
+				"legendutils.*"
+			};
 
 	public XpCleanup(LegendUtils instance) {
 		plugin = instance;
@@ -19,12 +24,10 @@ public class XpCleanup implements CommandExecutor {
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] split) {
-		if (!(sender instanceof Player)) {
-			return false;
-		}
-		if (plugin.getServer().getPluginManager().isPluginEnabled("Permissions")) {
+		boolean r = false;
+		if ((plugin.getServer().getPluginManager().isPluginEnabled("Permissions") || (sender.isOp()))) {
 			Player player = (Player) sender;
-			if (hasPermission(player)) {
+			if ((hasPermission(player, permissions) || player.isOp())) {
 				System.out.println("Cleaning XP Orbs from worlds...");
 				double count = 0;
 				for (World w : plugin.getServer().getWorlds()) {
@@ -37,18 +40,18 @@ public class XpCleanup implements CommandExecutor {
 				}
 				System.out.println("Removed " + (int)count + " XP Orbs");
 				player.sendMessage("Removed " + (int)count + " XP Orbs");
-				return true;
+				r = true;
 			}
 		}
-		return false;
+		return r;
 	}
 	
-	private boolean hasPermission(Player player) {
-		if (plugin.permissionHandler.has(player, "legendutils.commands.xpcleanup") || 
-				plugin.permissionHandler.has(player, "legendutils.commands.*") || 
-				plugin.permissionHandler.has(player, "legendutils.*")) {
-			return true;
+	private boolean hasPermission(Player player, String[] perms) {
+		boolean r = false;
+		for (String s : perms) {
+			if (plugin.permissionHandler.has(player, s))
+				r = true;
 		}
-		return false;
+		return r;
 	}
 }
