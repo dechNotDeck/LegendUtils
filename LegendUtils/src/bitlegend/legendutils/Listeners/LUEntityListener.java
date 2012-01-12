@@ -26,7 +26,7 @@ public class LUEntityListener extends EntityListener {
 			int xp = 0;
 			if (event.getEntity() instanceof Player) {
 				Player p = (Player)event.getEntity();
-				int playerxp = p.getExperience();
+				int playerxp = (int)p.getExp();
 				xp = (int)(playerxp * 0.1);
 			} else {
 				xp = event.getDroppedExp();

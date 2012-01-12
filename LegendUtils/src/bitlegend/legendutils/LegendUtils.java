@@ -1,5 +1,7 @@
 package bitlegend.legendutils;
 
+import java.io.File;
+
 import org.bukkit.event.Event;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
@@ -50,9 +52,14 @@ public class LegendUtils extends JavaPlugin {
 		getCommand("ti").setExecutor(new ToggleInventory(this));
 		getCommand("xpcleanup").setExecutor(new XpCleanup(this));
 		
-		// Setup configs, databases
+		// Setup configs, databases, folders
 		config.configCheck();
 		PluginDescriptionFile pdfFile = this.getDescription();
+		String tiPath = "plugins" + File.separator + "LegendUtils" + 
+				File.separator + "ToggleInventory" + File.separator;
+		File tiDir = new File(tiPath);
+		if (!tiDir.exists())
+			tiDir.mkdir();
 		
 		// Threads
 		Thread checkUsers = new OnlineUsers(this).getThread();
